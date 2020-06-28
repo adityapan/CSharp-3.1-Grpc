@@ -1,0 +1,31 @@
+syntax = "proto3";
+
+option csharp_namespace = "GrpcServer";
+
+service Games {
+	rpc GetUserOs (OsRequest) returns (OsResponse);
+	rpc GetNewGames (NewGamesRequest) returns (stream NewGamesResponse);
+}
+
+message NewGamesRequest{
+}
+
+message NewGamesRequirement{
+	bool needsGraphicsCard = 1;
+	bool isWindowsSupported = 2;
+	bool isLinuxSupported = 3;
+}
+
+message NewGamesResponse{
+	string name = 1;
+	float price = 2;
+	NewGamesRequirement requirement = 3;
+}
+
+message OsRequest {
+	int32 userId = 1;
+}
+
+message OsResponse {
+	string useros = 1;
+}
